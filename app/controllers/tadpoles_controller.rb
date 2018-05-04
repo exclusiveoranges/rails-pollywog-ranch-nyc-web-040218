@@ -1,7 +1,20 @@
 class TadpolesController < ApplicationController
   before_action :set_tadpole, only: [:show, :edit, :update, :destroy, :metamorphose]
 
-  # add your metamorphose action here
+  def metamorphose
+    @frog = Frog.new
+    @frog.name = @tadpole.name
+    @frog.color = @tadpole.color
+    @frog.pond = @tadpole.pond
+
+      if @frog.save
+         @tadpole.destroy
+         redirect_to @frog
+      else
+        render :show
+      end
+
+  end
 
   def index
     @tadpoles = Tadpole.all
@@ -39,6 +52,7 @@ class TadpolesController < ApplicationController
       end
     end
   end
+
 
   def destroy
     @tadpole.destroy

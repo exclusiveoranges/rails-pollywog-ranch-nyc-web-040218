@@ -28,6 +28,7 @@ class FrogsController < ApplicationController
     end
   end
 
+
   def update
     respond_to do |format|
       if @frog.update(frog_params)
